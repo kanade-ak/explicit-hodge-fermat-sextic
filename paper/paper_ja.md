@@ -83,3 +83,9 @@ $`K = \mathbb{Q}(\zeta_{12}, \sqrt[3]{2})`$ 上の 5 種の明示的な正規被
 | 線形層 $`V`$（1001） | $`P`$（直線平面, deg 1） | $`P`$（直線平面, deg 1） |
 | 非線形 `DEC20`（720） | $`Z_{\mathrm{DEC20}}^{C_4}`$（型 $`(1,2,2)`$, deg 4; $`v_3 = 0, v_2 = 380`$） | $`Z_{\mathrm{DEC20}}^{\mathrm{cube}}`$（型 $`(1,2,3)`$, deg 6; $`v_2 = 0`$） |
 | 非線形 `J11`（30） | $`Z_{\mathrm{J11}}^{\mathrm{Aoki}}`$（型 $`(2,2,3)`$, deg 12; $`v_3 = 0, v_2 = 46`$） | $`Z_{\mathrm{J11}}^{\mathrm{cube}}`$（型 $`(2,2,3)`$, deg 12; $`v_2 = 0, v_3 = 30`$） |
+
+---
+
+## 謝辞
+
+文書作成およびスクリプトの整理に AI を使用しています（I use AI for creating documents and organizing scripts.）。
