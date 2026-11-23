@@ -1,5 +1,7 @@
 # Explicit Complete Intersection Generators for the Integral Hodge Lattice of the Fermat Sextic Fourfold and Surface
 
+I use AI for creating documents and organizing scripts.
+
 This repository contains deterministic, self-contained computational verification scripts and a Japanese summary accompanying:
 
 > **Explicit Complete Intersection Generators for the Integral Hodge Lattice of the Fermat Sextic Fourfold and Surface**
