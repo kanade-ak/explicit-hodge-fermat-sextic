@@ -2,7 +2,7 @@
 
 I use AI for creating documents and organizing scripts.
 
-This repository contains deterministic, self-contained computational verification scripts and a Japanese summary accompanying:
+This repository contains the manuscript and deterministic, self-contained computational verification scripts accompanying:
 
 > **Explicit Complete Intersection Generators for the Integral Hodge Lattice of the Fermat Sextic Fourfold and Surface**
 
@@ -12,6 +12,8 @@ This repository contains deterministic, self-contained computational verificatio
 explicit-hodge-fermat-sextic/
 ├── README.md                              # This file
 ├── paper/
+│   ├── paper_en.tex                       # English manuscript (LaTeX source)
+│   ├── paper_en.pdf                       # Compiled PDF (10 pages, zero warnings)
 │   └── paper_ja.md                        # Japanese summary and comparison table
 └── verification/
     ├── verify_surface_x62.sage            # Theorem A, Prop 3.1(1), and Table 1 (~5 s)
@@ -39,6 +41,7 @@ explicit-hodge-fermat-sextic/
 
 - **SageMath 10.x** (tested on SageMath 10.10 with FLINT and Singular)
 - **Python 3.11+ with NumPy 2.x** (bundled with SageMath)
+- **TeX Live** (`pdflatex` with standard `amsart`, `amsmath`, `amssymb`, `amsthm`, `array`, `hyperref`) to rebuild `paper/paper_en.pdf`
 
 ## Quick Verification Commands
 

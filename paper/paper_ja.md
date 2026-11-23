@@ -1,5 +1,6 @@
 # 日本語要旨・解説：Fermat 6次4重超曲面 $`X_6^4`$ および 6次曲面 $`X_6^2`$ の整数ホッジ格子に対する明示的完全交差生成系
 
+> 英語本論文：[paper_en.tex](paper_en.tex)（LaTeX）/ [paper_en.pdf](paper_en.pdf)（PDF）
 > 曲面独立検証スクリプト：[verify_surface_x62.sage](../verification/verify_surface_x62.sage)
 > 先行研究クロス監査スクリプト：[audit_truth_serum.py](../verification/audit_truth_serum.py)
 

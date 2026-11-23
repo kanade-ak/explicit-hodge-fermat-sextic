@@ -1,0 +1,471 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{array}
+\usepackage{hyperref}
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{23cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-0.5cm}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\SNF}{\operatorname{SNF}}
+\newcommand{\HNF}{\operatorname{HNF}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\disc}{\operatorname{disc}}
+\newcommand{\prim}{\mathrm{prim}}
+\newcommand{\CI}{\mathrm{CI}}
+
+\title[Explicit Generators for Fermat Sextics]{Explicit Complete Intersection Generators for the Integral Hodge Lattice of the Fermat Sextic Fourfold and Surface}
+
+\author{kanade-ak}
+\date{November 23, 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $X_6^4 \subset \PP^5$ ($x_0^6 + \cdots + x_5^6 = 0$) be the Fermat sextic fourfold, whose integral
+Hodge lattice $\Hdg^2(X_6^4, \ZZ)$ has rank~$1752$.
+The Integral Hodge Conjecture for $X_6^4$ was recently proved by Santana de Jesus~\cite{SdJ26},
+whose explicit cycle families reached index~$3^{105}$ ($63/70$ modulo~$3$ in each of the $15$ four-odd
+sectors) and required non-explicit Lefschetz~$(1,1)$ correspondences on the Fermat sextic curve
+transported via Shioda--Katsura blow-ups to close the remaining $105$ directions, leaving the construction
+of explicit equation-defined generators open~\cite[Remark~8(1)]{SdJ26}.
+In this paper we resolve~\cite[Remark~8(1)]{SdJ26} and give a substantially simpler, completely explicit
+proof: working over the single degree-$12$ number field $K = \QQ(\zeta_{12}, \sqrt[3]{2})$, we show that
+the $(\mu_6^6 \rtimes S_6)$-orbits of just \emph{five} explicit families of normal reduced complete
+intersection surfaces on $X_6^4$ generate $\Hdg^2(X_6^4, \ZZ)$ integrally with index~$1$, with no
+abstract correspondences or blow-up transports.
+The key missing ingredient is a degree-$4$ type-$(1,2,2)$ family $Z_{\mathrm{DEC20}}^{C_4}$ arising from
+quadratic sections of the elliptic K3 quotient $S_{\mathrm{K3}} : Y_2^3 + Y_3^3 = -(1+u^6)$;
+directly cross-checked against the published $3$-adic basis of~\cite{SdJ26}, linear planes together with
+$Z_{\mathrm{DEC20}}^{C_4}$ alone span all $70/70$ dimensions modulo~$3$ of the four-odd sector~$00111$.
+We likewise prove that three smooth complete intersection curve families over $K$ generate $\NS(X_6^2)$
+integrally with index~$1$, and determine the complete Smith normal forms and two-layer $3$-adic gluing
+structure ($(\ZZ/3\ZZ)^{375}$ and $(\ZZ/3\ZZ)^{30}$, with zero $2$-adic gluing) of all Shioda strata
+inside $H_4(X_6^4, \ZZ)_0$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $X$ be a smooth complex projective variety. The \emph{Integral Hodge Conjecture} (IHC) in codimension~$p$ asks whether the cycle class map
+\[
+  \mathrm{cl}^p : \CH^p(X) \longrightarrow \Hdg^p(X, \ZZ) := H^{2p}(X, \ZZ) \cap H^{p,p}(X)
+\]
+is surjective. While the Lefschetz $(1,1)$-theorem settles $p = 1$, the IHC fails in general starting in dimension~$3$ and codimension~$2$: Atiyah--Hirzebruch~\cite{AH62} exhibited torsion counterexamples, Koll\'ar~\cite{Kol92} constructed torsion-free counterexamples among very general hypersurfaces in $\PP^4$ of high degree, and subsequent works of Totaro, Voisin, Colliot-Th\'el\`ene--Voisin, and others uncovered deep birational and unramified cohomology obstructions. On the positive side, Voisin~\cite{Voi13} proved the IHC for smooth cubic fourfolds $X_3^4 \subset \PP^5$.
+
+A central testing ground for codimension-$2$ integral cycles in higher degree is the family of even-dimensional Fermat varieties
+\[
+  X_d^n : \quad x_0^d + x_1^d + \cdots + x_{n+1}^d = 0 \subset \PP^{n+1}, \qquad n = 2m.
+\]
+By Shioda~\cite{Shi79}, the rational Hodge conjecture holds for $X_d^4$ whenever $d$ is prime, $d = 4$, or $d \le 20$; in particular, the middle cohomology of the Fermat sextic fourfold $X_6^4$ has $\rank \Hdg^2(X_6^4, \ZZ) = h^{2,2}(X_6^4) = 1752$, decomposed under the Shioda character action of $\mu_6^6 \rtimes S_6$ into
+\[
+  1752 = 1\ (h^2) + 1001\ (\text{linear } V) + 720\ (\text{decomposable } W_{\mathrm{DEC20}}) + 30\ (\text{join } W_{\mathrm{J11}}).
+\]
+For the linear sublattice $V_d^n \subset H_n(X_d^n, \ZZ)$ spanned by linear $\PP^{n/2} \subset X_d^n$, Degtyarev~\cite{Deg15} proved that lines generate $\Pic(X_d^2)$ integrally whenever $\gcd(d, 6) = 1$, Degtyarev--Shimada~\cite{DS16} established a primitivity criterion for linear subspaces, and Aljovin--Movasati--Villaflor Loyola~\cite{AMVL19} computed the exact elementary divisors of $V_d^n$ for all $(n, d)$ in their Table~1, proving the IHC for $X_4^4$ and $X_5^4$ (where $V_d^4 = \Hdg^2(X_d^4, \ZZ)$).
+For $X_6^4$, where linear planes span only $1002$ of the $1752$ dimensions, Braun--Fortin--Lopez Garcia--Villaflor Loyola~\cite{BFLGVL24} exhibited an explicit rational basis of algebraic surfaces of types $(1,1,1)$, $(1,2,3)$, and $(2,2,3)$ and proved the Hodge conjecture with coefficients in $\ZZ[\tfrac{1}{6}]$.
+
+Very recently, Rafael Santana de Jesus~\cite{SdJ26} achieved the first proof of the full Integral Hodge Conjecture for $X_6^4$.
+In~\cite{SdJ26}, the planes and $(1,2,3)$, $(2,2,3)$ complete intersections of~\cite{BFLGVL24} span a sublattice $A_0 \subset S := \Hdg^2(X_6^4, \ZZ)_0$ of exact index~$3^{540}$ (already saturated at $p = 2$ and all $\ell \ne 3$).
+Adjoining three further explicit families---$360$ quadric-cone K3 pullbacks, $900$ pairs of six-tangent conics, and $2880$ twisted pairs ($5611$ explicit classes in total)---lowered the index along the chain $3^{540} \to 3^{345} \to 3^{120} \to 3^{105}$, stopping at $63$ out of $70$ dimensions modulo~$3$ in each of the $15$ parity sectors with four odd characters.
+To close the final $105 = 15 \cdot 7$ directions, \cite{SdJ26} invoked non-explicit algebraic correspondences $\mathcal{T}_\beta$ arising via the Lefschetz~$(1,1)$ theorem from complex multiplication endomorphisms of the Fermat sextic curve transported through Shioda--Katsura blow-ups, and explicitly posed~\cite[Remark~8(1)]{SdJ26}: to produce an explicit equation-defined generating set of $\Hdg^2(X_6^4, \ZZ)$.
+
+In this paper, we answer~\cite[Remark~8(1)]{SdJ26} completely and provide an independent, streamlined, purely complete-intersection proof of the IHC for $X_6^4$, together with the analogous integral generation result for the Fermat sextic surface $X_6^2$ and the complete Shioda-stratum Smith normal form and gluing classification.
+All five explicit surface families on $X_6^4$ (and all three smooth curve families on $X_6^2$) are defined over the single degree-$12$ number field
+\[
+  K := \QQ(\zeta_{12}, \sqrt[3]{2}), \qquad a := -\frac{1}{\sqrt[3]{2}} = \left(-\frac{1}{2}\right)^{1/3}, \qquad \beta := 2a = -\sqrt[3]{4}, \qquad i := \zeta_{12}^3.
+\]
+The crucial family missed in~\cite{BFLGVL24, SdJ26} is the degree-$4$ type-$(1,2,2)$ complete intersection surface $Z_{\mathrm{DEC20}}^{C_4}$ obtained from a symmetric quadratic section of the elliptic K3 quotient $S_{\mathrm{K3}} : Y_2^3 + Y_3^3 = -(1+u^6)$: remarkably, $Z_{\mathrm{DEC20}}^{C_4}$ alone (together with linear planes $P$ and $Z_{\mathrm{J11}}^{\mathrm{Aoki}}$) annihilates the entire $3$-adic gluing index down to $3^0 = 1$, eliminating the need for quadric-cone pullbacks, conic pairs, and abstract Lefschetz~$(1,1)$ correspondences altogether.
+
+\subsection{Main Results}
+
+\begin{theorem}[Explicit integral generation of $\NS(X_6^2)$]\label{thm:A}
+Let $X_6^2 \subset \PP^3$ be the Fermat sextic surface ($\rho(X_6^2) = h^{1,1}(X_6^2) = 86$). Consider the three families of smooth complete intersection curves on $X_6^2$ defined over $K = \QQ(\zeta_{12}, \sqrt[3]{2})$:
+\begin{align*}
+  L &\;:\; x_0 - \zeta_{12} x_1 = 0,\quad x_2 - \zeta_{12} x_3 = 0 && (\deg 1,\ g = 0,\ L^2 = -4), \\
+  C_4 &\;:\; x_2^2 = a(x_0^2 + i x_0 x_1 + x_1^2),\quad x_3^2 = a(x_0^2 - i x_0 x_1 + x_1^2) && (\deg 4,\ g = 1,\ C_4^2 = -8), \\
+  C_{\mathrm{cube}} &\;:\; x_3^2 = \sqrt[3]{2}\, x_0 x_2,\quad x_1^3 = i(x_0^3 + x_2^3) && (\deg 6,\ g = 4,\ C_{\mathrm{cube}}^2 = -6).
+\end{align*}
+Then the $(\mu_6^4 \rtimes S_4)$-orbits of $L$, $C_4$, and $C_{\mathrm{cube}}$ generate the entire N\'eron--Severi lattice $\NS(X_6^2)$ over $\ZZ$ with index~$1$:
+\[
+  \NS(X_6^2) = \langle L,\; C_4,\; C_{\mathrm{cube}} \rangle_{\mu_6^4 \rtimes S_4}.
+\]
+In contrast, the orbits of lines and the classical degree-$6$ Aoki--Shioda curve $C_{\mathrm{Aoki}}$~\cite{AS83,AS10} have index $2^{16}\cdot 3^6$ in $\NS(X_6^2)$, while $\langle L, C_4 \rangle$ has index $2^{16}$ (annihilating the $3$-adic index completely).
+\end{theorem}
+
+\begin{theorem}[Complete integral lattice and gluing structure of $X_6^4$]\label{thm:B}
+Let $L = H_4(X_6^4, \ZZ)_0$ ($\rank 2605$, $\disc L = 6$) be the primitive middle homology lattice of $X_6^4$, and let
+\[
+  S := \Hdg^2(X_6^4, \ZZ)_0 \quad (\rank 1751), \qquad T := S^\perp \subset L \quad (\rank 854)
+\]
+be the primitive Hodge and transcendental lattices, with primitive Shioda sublattices $V \subset S$ ($\rank 1001$), $W := V^\perp \cap S$ ($\rank 750$), $W_{\mathrm{DEC20}} \subset W$ ($\rank 720$), and $W_{\mathrm{J11}} \subset W$ ($\rank 30$). Then:
+\begin{enumerate}
+  \item Every sublattice discriminant and gluing group of $L$ is supported strictly on the primes $p \in \{2, 3\}$.
+  \item The exact Smith normal forms and absolute discriminants are:
+  \begin{footnotesize}
+  \begin{align*}
+    \SNF(S) &= 1^{900}\cdot 2^{109}\cdot 4^{34}\cdot 12^{281}\cdot 36^{281}\cdot 108^{44}\cdot 216^{100}\cdot 864\cdot 2592, & |\det S| &= 2^{1699}\cdot 3^{1282}, \\
+    \SNF(\Hdg^2(X_6^4,\ZZ)) &= 1^{902}\cdot 2^{108}\cdot 4^{35}\cdot 12^{280}\cdot 36^{281}\cdot 108^{44}\cdot 216^{100}\cdot 864\cdot 2592, & |\det \Hdg^2| &= 2^{1698}\cdot 3^{1281}, \\
+    \SNF(V) &= 1^{308}\cdot 3^{272}\cdot 6^{41}\cdot 12^{163}\cdot 36^{116}\cdot 108^{61}\cdot 216^{24}\cdot 648^{16}, & |\det V| &= 2^{841}\cdot 3^{1027}, \\
+    \SNF(W) &= 1^{150}\cdot 3^{170}\cdot 6^{68}\cdot 12^{17}\cdot 36^{283}\cdot 72^{17}\cdot 216^{30}\cdot 648^{13}\cdot 2592^2, & |\det W| &= 2^{858}\cdot 3^{1005}, \\
+    \SNF(W_{\mathrm{DEC20}}) &= 1^{135}\cdot 3^{185}\cdot 6^{55}\cdot 18^5\cdot 36^{280}\cdot 72^{15}\cdot 216^{30}\cdot 648^{15}, & |\det W_{\mathrm{DEC20}}| &= 2^{800}\cdot 3^{990}, \\
+    \SNF(W_{\mathrm{J11}}) &= 18^8\cdot 36^7\cdot 108^{13}\cdot 864^2, & |\det W_{\mathrm{J11}}| &= 2^{58}\cdot 3^{75}.
+  \end{align*}
+  \end{footnotesize}
+  In particular, the $2$-adic and $3$-adic Smith valuations of $S$ ($0^{900}1^{109}2^{640}3^{100}5^2$ at $p=2$ and $0^{1043}1^{281}2^{281}3^{145}4^1$ at $p=3$) agree identically with~\cite[Computation~2.2]{SdJ26}.
+  \item The two non-linear gluing layers are purely $3$-elementary (zero $2$-adic gluing across all strata):
+  \[
+    S / (V \oplus W) \cong (\ZZ/3\ZZ)^{375}, \qquad W / (W_{\mathrm{DEC20}} \oplus W_{\mathrm{J11}}) \cong (\ZZ/3\ZZ)^{30}.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Explicit complete intersection generators of $\Hdg^2(X_6^4, \ZZ)$]\label{thm:C}
+Consider the five explicit families of normal reduced complete intersection surfaces on $X_6^4$ defined over $K = \QQ(\zeta_{12}, \sqrt[3]{2})$:
+\begin{small}
+\begin{align*}
+  P &: x_0 = \zeta_{12} x_1,\;\; x_2 = \zeta_{12} x_3,\;\; x_4 = \zeta_{12} x_5 && (\CI(1,1,1),\ \deg 1), \\
+  Z_{\mathrm{DEC20}}^{C_4} &: x_2^2 = a(x_0^2 + i x_0 x_1 + x_1^2),\;\; x_3^2 = a(x_0^2 - i x_0 x_1 + x_1^2),\;\; x_4 = \zeta_{12} x_5 && (\CI(1,2,2),\ \deg 4), \\
+  Z_{\mathrm{J11}}^{\mathrm{Aoki}} &: x_2^2 + x_3^2 = \beta x_0^2,\;\; x_4^2 + x_5^2 = \beta x_1^2,\;\; x_0(x_3^2 - a x_0^2) = i x_1(x_5^2 - a x_1^2) && (\CI(2,2,3),\ \deg 12), \\
+  Z_{\mathrm{DEC20}}^{\mathrm{cube}} &: x_3^2 = \sqrt[3]{2}\, x_0 x_2,\;\; x_1^3 = i(x_0^3 + x_2^3),\;\; x_4 = \zeta_{12} x_5 && (\CI(1,2,3),\ \deg 6), \\
+  Z_{\mathrm{J11}}^{\mathrm{cube}} &: x_3^2 = \sqrt[3]{2}\, x_0 x_2,\;\; x_5^2 = \sqrt[3]{2}\, x_1 x_4,\;\; x_0^3 + x_2^3 = i(x_1^3 + x_4^3) && (\CI(2,2,3),\ \deg 12).
+\end{align*}
+\end{small}
+Here $Z_{\mathrm{DEC20}}^{\mathrm{cube}}$ and $Z_{\mathrm{J11}}^{\mathrm{cube}}$ coincide with the $(1,2,3)$ and $(2,2,3)$ surfaces $P_1, P_2$ of~\cite{BFLGVL24,SdJ26}. Then:
+\begin{enumerate}
+  \item The sublattice generated by the $(\mu_6^6 \rtimes S_6)$-orbits of the first three families satisfies
+  \[
+    \bigl[\Hdg^2(X_6^4, \ZZ) : \langle P,\; Z_{\mathrm{DEC20}}^{C_4},\; Z_{\mathrm{J11}}^{\mathrm{Aoki}} \rangle\bigr] = 2^{426} = 2^{380} \cdot 2^{46},
+  \]
+  which establishes the $\ZZ[\tfrac{1}{2}]$-Integral Hodge Conjecture for $X_6^4$ (index~$1$ at every odd prime $p \ge 3$, realizing all $405$ dimensions of $3$-adic gluing without any correspondences).
+  \item Adjoining the $(\mu_6^6 \rtimes S_6)$-orbits of $Z_{\mathrm{DEC20}}^{\mathrm{cube}}$ (which annihilates the $2^{380}$ index in $W_{\mathrm{DEC20}}$) and $Z_{\mathrm{J11}}^{\mathrm{cube}}$ (which annihilates the $2^{46}$ index in $W_{\mathrm{J11}}$) yields full integral generation:
+  \[
+    \Hdg^2(X_6^4, \ZZ) = \langle P,\; Z_{\mathrm{DEC20}}^{C_4},\; Z_{\mathrm{J11}}^{\mathrm{Aoki}},\; Z_{\mathrm{DEC20}}^{\mathrm{cube}},\; Z_{\mathrm{J11}}^{\mathrm{cube}} \rangle_{\mu_6^6 \rtimes S_6}.
+  \]
+  In particular, this resolves~\cite[Remark~8(1)]{SdJ26} by providing a completely explicit equation-based generating set for $\Hdg^2(X_6^4, \ZZ)$ and an independent, self-contained proof of the Integral Hodge Conjecture for $X_6^4$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[Arithmetic $2$-adic/$3$-adic complementarity of the five families]
+Each of the five families in Theorem~\ref{thm:C} plays a distinct, indispensable role:
+$P$ saturates $V$ at all primes; on $W_{\mathrm{DEC20}}$, $Z_{\mathrm{DEC20}}^{C_4}$ saturates $p = 3$ (while leaving $v_2 = 380$) and $Z_{\mathrm{DEC20}}^{\mathrm{cube}}$ saturates $p = 2$; on $W_{\mathrm{J11}}$, $Z_{\mathrm{J11}}^{\mathrm{Aoki}}$ saturates $p = 3$ (covering all $30$ glue directions of $W / (W_{\mathrm{DEC20}} \oplus W_{\mathrm{J11}})$ while leaving $v_2 = 46$) and $Z_{\mathrm{J11}}^{\mathrm{cube}}$ saturates $p = 2$ (leaving $v_3 = 30$ if used without $Z_{\mathrm{J11}}^{\mathrm{Aoki}}$).
+\end{remark}
+
+\section{Preliminaries: Pham Lattices, Shioda Decomposition, and Griffiths Residues}
+
+\subsection{Character decomposition}
+For $X_d^n \subset \PP^{n+1}$ ($n = 2m$), let
+\[
+  \mathfrak{A}_d^n = \Bigl\{ a = (a_0, \dots, a_{n+1}) \in \{1, \dots, d-1\}^{n+2} : \sum_{k=0}^{n+1} a_k \equiv 0 \pmod d \Bigr\}.
+\]
+The primitive cohomology decomposes into $1$-dimensional eigenspaces $H^n(X_d^n, \CC)_0 = \bigoplus_{a \in \mathfrak{A}_d^n} V(a)$ for the diagonal action of $\mu_d^{n+2}/\mu_d$.
+A character $a \in \mathfrak{A}_d^n$ lies in $\Hdg^m(X_d^n, \CC)_0$ if and only if $\sum_{k=0}^{n+1} \langle t a_k \rangle_d = (m+1)d$ for all $t \in (\ZZ/d\ZZ)^\times$, where $\langle x \rangle_d \in \{1,\dots,d-1\}$ denotes the least positive residue modulo~$d$~\cite{Shi79}.
+For $d = 6$, $(\ZZ/6\ZZ)^\times = \{1, 5\}$, so every $(m,m)$-character is automatically Hodge:
+\begin{itemize}
+  \item For $X_6^2$: $|\mathfrak{A}_6^2| = 105$, $h^{2,0} = 10$, and $\rank \NS(X_6^2)_0 = 85 = 61 + 24$, where the $61$-dimensional linear part is $V_0(X_6^2)$ and the $24$-dimensional non-linear part consists of the $S_4$-orbits of $(1,3,4,4)$ and $(5,3,2,2)$.
+  \item For $X_6^4$: $|\mathfrak{A}_6^4| = 2605$, $h^{4,0} = 1$, $h^{3,1} = 426$, and $\rank \Hdg^2(X_6^4, \ZZ)_0 = 1751 = 1001 + 720 + 30$, corresponding to $V$, $W_{\mathrm{DEC20}}$ (the orbits of $(1,3,4,4)+(a,6-a)$ and conjugates), and $W_{\mathrm{J11}}$ (the $S_6$-permutations of $(1,1,4,4,4,4)$ and $(5,5,2,2,2,2)$).
+\end{itemize}
+
+\subsection{Pham vanishing-cycle lattice and prime support}
+Following Pham and~\cite{AMVL19}, the middle homology of the affine Fermat variety $U_d^n = \{x_1^d + \cdots + x_{n+1}^d = -1\}$ is freely generated by $(d-1)^{n+1}$ vanishing cycles $\delta_b$ ($b \in \{0,\dots,d-2\}^{n+1}$) with Seifert form $F = F_1^{\otimes (n+1)}$, where $(F_1)_{ij} = 1$ if $i=j$, $-1$ if $j=i+1$, and $0$ otherwise. The intersection form on $H_n(U_d^n, \ZZ)$ is $\Psi = (-1)^{n(n+1)/2}(F + (-1)^n F^T)$.
+
+\begin{proposition}[Prime-support restriction]\label{prop:prime-support}
+For $X_6^4$ ($n=4, d=6$), the Milnor fiber lattice $\ZZ^{5^5}$ has $\rank(\Psi) = 2605$ with $\SNF(\Psi) = 0^{520}\cdot 1^{2604}\cdot 6^1$, and the period-matrix transformation $\Phi$ from vanishing cycles to $\ZZ[\zeta_6]$-eigencharacters satisfies $|\det(\Phi)| = 6^r$ (supported exclusively on $p \in \{2, 3\}$). Consequently, every primitive sublattice $M \subseteq H_4(X_6^4, \ZZ)_0$ defined by vanishing of a $\mathrm{Gal}(\QQ(\zeta_6)/\QQ)$-invariant subset of character periods, as well as every gluing group between orthogonal direct sums of such sublattices, has discriminant and order divisible only by $p \in \{2, 3\}$.
+\end{proposition}
+\begin{proof}
+In the projective homology $L = H_4(X_6^4, \ZZ)_0 = \ZZ^{3125} / \ker(\Psi)$, the intersection form has $\det(L) = 6$. The $\mu_6^5$-character period matrix over $\ZZ[\zeta_6]$ is a Kronecker power of the $5 \times 5$ matrix $F_{\mathrm{char}} = ((1 - \zeta_6^a)\zeta_6^{a b})_{1 \le a \le 5,\, 0 \le b \le 4}$ (the Vandermonde matrix $(\zeta_6^{ab})$ of determinant $-36 = -6^2$ scaled by the vanishing-cycle boundary factors $1 - \zeta_6^a$ with $\prod_{a=1}^5 (1 - \zeta_6^a) = 6$), whose determinant is $\det(F_{\mathrm{char}}) = -216 = -6^3$. Hence over $\ZZ[\tfrac{1}{6}]$, $L \otimes \ZZ[\tfrac{1}{6}]$ splits as an orthogonal direct sum of unimodular $\ZZ[\tfrac{1}{6}]$-lattices along every Galois-invariant character partition.
+\end{proof}
+
+\subsection{Complete intersection residue formula and dual split-prime exact Gram restoration}
+Let $Z = V(g_1, \dots, g_{m+1}) \subset X_d^{2m}$ be a complete intersection of codimension $m+1$ in $\PP^{2m+1}$ with $f = x_0^d + \cdots + x_{2m+1}^d = \sum_{k=1}^{m+1} g_k h_k$. By Villaflor Loyola~\cite{VL22} (extending Movasati--Villaflor Loyola~\cite{MVL18}), the primitive cohomology class $[Z]_\prim \in H^{m,m}_\prim(X_d^{2m}, \CC)$ is represented in the Jacobian ring $R_f = \CC[x_0,\dots,x_{2m+1}]/(x_0^{d-1}, \dots, x_{2m+1}^{d-1})$ in degree $(m+1)(d-2)$ by a universal nonzero constant multiple of the Jacobian determinant
+\[
+  J_Z := \det\!\left(\frac{\partial(g_1,\dots,g_{m+1},h_1,\dots,h_{m+1})}{\partial(x_0,\dots,x_{2m+1})}\right) \bmod (x_0^{d-1},\dots,x_{2m+1}^{d-1}).
+\]
+Writing $J_Z = \sum_b c_b(Z) x^b$ over the monomial basis $\{x^b : 0 \le b_k \le d-2,\ \sum b_k = (m+1)(d-2)\}$, the cup-product pairing satisfies
+\[
+  \langle [Z_1]_\prim, [Z_2]_\prim \rangle = C_{\mathrm{norm}} \sum_b c_b(Z_1)\, c_{\bar{b}}(Z_2), \qquad \bar{b} = (d-2-b_0, \dots, d-2-b_{2m+1}).
+\]
+Calibrating against a linear subspace $P$ (for $X_6^2$: $L^2 = -4$, $[L]_\prim^2 = -25/6$; for $X_6^4$: $P^2 = 21$, $[P]_\prim^2 = 125/6$) yields the exact rational constants
+\[
+  C_{\mathrm{norm}}(X_6^2) = -\frac{1}{7776} = -\frac{1}{6^5}, \qquad C_{\mathrm{norm}}(X_6^4) = -\frac{1}{279936} = -\frac{1}{6^7}.
+\]
+
+\begin{lemma}[Exact integer Gram restoration via split primes]\label{lem:split-prime}
+On $H^{2,2}_\prim(X_6^4, \RR)$ (positive definite by the Hodge--Riemann bilinear relations; negative definite on $H^{1,1}_\prim(X_6^2, \RR)$), any two integral primitive classes $Z_1^\circ, Z_2^\circ \in S$ drawn from the orbits of our five surface families satisfy $|\langle Z_1^\circ, Z_2^\circ \rangle| \le \sqrt{(Z_1^\circ)^2 (Z_2^\circ)^2} \le 440 < 1960/3 < 10009/2$.
+Consequently, choosing a prime $q > 1308$ (in fact $q > 880$) that splits completely in $K = \QQ(\zeta_{12}, \sqrt[3]{2})$ (we use $q_1 = 10009$ and independently cross-verify every Gram matrix against $q_2 = 10333$), the balanced representative in $(-q/2, q/2)$ of the $\FF_q$-pairing $C_{\mathrm{norm}} \sum_b c_b(Z_1^\circ) c_{\bar{b}}(Z_2^\circ) \pmod q$ recovers the \emph{exact} integer intersection number $\langle Z_1^\circ, Z_2^\circ \rangle \in \ZZ$.
+\end{lemma}
+\begin{proof}
+Since $P_0 \cdot h^2 = 1$, every cycle $Z$ of degree $\delta$ yields an integral primitive class $Z^{\circ} := Z - \delta P_0 \in S$ (for $6 \mid \delta$, $Z_\prim = Z - \frac{\delta}{6} h^2$ is already integral in $S$). The primitive self-intersections of the five templates are $[P]_\prim^2 = 125/6$, $[Z_{\mathrm{DEC20}}^{C_4}]_\prim^2 = 160/3$, $(Z_{\mathrm{DEC20}}^{\mathrm{cube}})^2 = 60$, and $(Z_{\mathrm{J11}}^{\mathrm{Aoki}})^2 = (Z_{\mathrm{J11}}^{\mathrm{cube}})^2 = 96$. By the triangle inequality on the positive-definite lattice $H^{2,2}_\prim(X_6^4, \RR)$,
+\[
+  (P - P_0)^2 \le \Bigl(2\sqrt{\tfrac{125}{6}}\Bigr)^2 = \frac{250}{3} < 84, \qquad
+  (Z_{\mathrm{DEC20}}^{C_4} - 4 P_0)^2 \le \Bigl(\sqrt{\tfrac{160}{3}} + 4\sqrt{\tfrac{125}{6}}\Bigr)^2 = \frac{1960}{3} < 654
+\]
+(exhaustively over all $3240$ planes on $X_6^4$, $(P - P_0)^2 \in \{0, 40, 42, 50\}$ with maximum~$50$ and $(Z_{\mathrm{DEC20}}^{C_4} - 4 P_0)^2 \in \{360, 376, 384, 392, 400, 440\}$ with maximum~$440$). By Cauchy--Schwarz, $|\langle Z_1^\circ, Z_2^\circ \rangle| \le 440 < 654 < q_1/2 = 5004.5$, so reduction modulo $q_1$ is injective on the image of the pairing.
+\end{proof}
+
+\section{Geometric Construction of the Explicit Cycle Families}
+
+\subsection{Why degree-\texorpdfstring{$4$}{4} pullbacks saturate \texorpdfstring{$p = 3$}{p = 3} but obstruct \texorpdfstring{$p = 2$}{p = 2}}
+Consider the quotient of $X_6^2$ by the subgroup $\langle (x_2 \mapsto -x_2),\ (x_3 \mapsto -x_3) \rangle \cong (\ZZ/2\ZZ)^2$:
+\[
+  \pi_2 : X_6^2 \longrightarrow S_{\mathrm{K3}} : \quad x_0^6 + x_1^6 + y_2^3 + y_3^3 = 0 \subset \PP(1,1,2,2), \qquad (y_2, y_3) = (x_2^2, x_3^2).
+\]
+Setting $u = x_0/x_1$, $S_{\mathrm{K3}}$ is an elliptic K3 surface $Y_2^3 + Y_3^3 = -(1 + u^6)$ over $\PP^1_u$.
+The classical Aoki--Shioda curve $C_{\mathrm{Aoki}}$ ($\deg 6$) comes from a degree-$3$ rational section with $Y_2 + Y_3 = \beta u^2$, whereas the symmetric quadratic ansatz $Y_2(u) = a(u^2 + b u + 1)$, $Y_3(u) = a(u^2 - b u + 1)$ yields
+\[
+  Y_2^3 + Y_3^3 = 2 a^3 u^6 + 6 a^3 (1 + b^2)(u^4 + u^2) + 2 a^3 = -(u^6 + 1)
+\]
+for $a^3 = -\tfrac{1}{2}$ and $b = i$, giving the smooth elliptic quartic $C_4 = \{x_2^2 = a(x_0^2 + i x_0 x_1 + x_1^2),\ x_3^2 = a(x_0^2 - i x_0 x_1 + x_1^2)\} \subset X_6^2$ and its cone/join $Z_{\mathrm{DEC20}}^{C_4} = \{C_4, x_4 = \zeta_{12} x_5\} \subset X_6^4$.
+Because $\deg(C_4) = 4$ is coprime to~$3$ and its coordinates $(x_0, x_1), (x_4, x_5)$ can be odd while $(x_2, x_3)$ are even, $Z_{\mathrm{DEC20}}^{C_4}$ directly populates all $15$ four-odd parity sectors and realizes the full $3$-adic gluing on both $X_6^2$ and $X_6^4$.
+However, for \emph{any} two curves $E_1, E_2 \subset S_{\mathrm{K3}}$, the push-pull formula for the degree-$4$ morphism $\pi_2$ gives
+\[
+  (\pi_2^* E_1) \cdot (\pi_2^* E_2) = 4\, (E_1 \cdot E_2),
+\]
+forcing every pairwise intersection in the non-linear projection $3\pi_{\mathrm{NL}}(\langle L, C_4 \rangle)$ to be divisible by~$4$ and leaving an unavoidable $2$-adic index of $2^{16}$ on $X_6^2$ (and $2^{380}$ in $W_{\mathrm{DEC20}}$, $2^{46}$ in $W_{\mathrm{J11}}$ on $X_6^4$).
+
+\subsection{Breaking the \texorpdfstring{$2$}{2}-adic barrier via the odd-degree K3 double-plane quotient \texorpdfstring{$Q_3$}{Q\_3}}
+To eliminate the factor of~$2$ structurally, observe that every non-linear character $(1,3,4,4)$ of $X_6^2$ has a unique coordinate equal to~$3$ and is therefore invariant under the order-$3$ automorphism $x_1 \mapsto \omega x_1$. The resulting quotient
+\[
+  \pi_3 : X_6^2 \longrightarrow Q_3 : \quad y_1^2 = -(x_0^6 + x_2^6 + x_3^6) \subset \PP(1, 3, 1, 1) \qquad (y_1 = x_1^3)
+\]
+is a smooth singular K3 surface ($\rho(Q_3) = 20$) realized as a double cover of $\PP^2$ branched along the Fermat sextic curve $B_6 : x_0^6 + x_2^6 + x_3^6 = 0$, and critically $\deg(\pi_3) = 3$ is \emph{odd}.
+
+A conic $Q : x_3^2 = c_0 x_0^2 + c_1 x_0 x_2 + c_2 x_2^2$ in $\PP^2$ splits into two smooth rational $(-2)$-curves on $Q_3$ whenever $x_0^6 + x_2^6 + (c_0 x_0^2 + c_1 x_0 x_2 + c_2 x_2^2)^3 = G_3(x_0, x_2)^2$ is a perfect square. Requiring $c_1 \ne 0$ breaks the $x_2 \mapsto -x_2$ involution. Solving this $0$-dimensional polynomial system by Gr\"obner bases yields the simplest solution $c_0 = c_2 = 0$, $c_1 = \sqrt[3]{2}$, $G_3 = x_0^3 + x_2^3$, giving the exact identity
+\[
+  x_0^6 + x_2^6 + x_3^6 \equiv (x_0^3 + x_2^3)^2 \pmod{x_3^2 - \sqrt[3]{2}\, x_0 x_2}.
+\]
+Pulling back to $X_6^2$ gives $C_{\mathrm{cube}} : \{x_3^2 = \sqrt[3]{2}\, x_0 x_2,\; x_1^3 = i(x_0^3 + x_2^3)\}$, and taking its linear cone and join in $X_6^4$ recovers $Z_{\mathrm{DEC20}}^{\mathrm{cube}}$ and $Z_{\mathrm{J11}}^{\mathrm{cube}}$ (the surfaces $P_1, P_2$ of~\cite{BFLGVL24,SdJ26}), all defined over the same degree-$12$ field $K = \QQ(\zeta_{12}, \sqrt[3]{2})$.
+
+\begin{proposition}[Complete intersection geometry and reducedness]\label{prop:geometry}
+\begin{enumerate}
+  \item On $X_6^2$, the curves $L$, $C_4$, and $C_{\mathrm{cube}}$ are all smooth complete intersections of projective dimension~$1$, of degrees $1, 4, 6$ and genera $0, 1, 4$, respectively.
+  \item On $X_6^4$, $P$ is smooth, while $Z_{\mathrm{DEC20}}^{C_4}$, $Z_{\mathrm{J11}}^{\mathrm{Aoki}}$, $Z_{\mathrm{DEC20}}^{\mathrm{cube}}$, and $Z_{\mathrm{J11}}^{\mathrm{cube}}$ are complete intersections in $\PP^5$ of pure projective dimension~$2$ contained in $X_6^4$, whose singular loci have projective dimension~$0$ (isolated singularities). By Serre's criterion ($R_1 + S_2$), all five schemes are normal and reduced surfaces; hence their scheme-theoretic fundamental classes $[Z]$ are genuine reduced integral $2$-cycles in $\CH^2(X_6^4)$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Verified symbolically via ideal dimension and Jacobian minor ideals using the scripts \texttt{verify\_5\_surfaces\_geometry.sage} and \texttt{referee\_certify\_exact.sage}:
+$\dim(I_Z) - 1 = 2$, $f_{\mathrm{Fermat}} \in I_Z$, and $\dim(I_Z + I_3(J_Z)) - 1 \in \{-2, 0\}$ for all five surfaces; on $X_6^2$, $\dim(I_C + I_2(J_C)) - 1 \le -1$ (empty singular locus) for all three curves.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:A}: Integral Generation of \texorpdfstring{$\NS(X_6^2)$}{NS(X\_6\^{}2)}}
+
+From the Pham intersection matrix $\Psi = -(F_1^{\otimes 3} + (F_1^T)^{\otimes 3})$ on $\ZZ^{125}$ ($\rank \Psi = 105$, $\SNF(\Psi) = 0^{20}\cdot 1^{104}\cdot 6^1$), taking the integral right kernel of the $20$ real period equations of $H^{2,0}(X_6^2) \oplus H^{0,2}(X_6^2)$ modulo $\ker(\Psi)$ yields the exact rank-$85$ primitive lattice $\NS(X_6^2)_0$:
+\begin{align*}
+  \SNF(\NS(X_6^2)_0) &= 1^{64}\cdot 2^1\cdot 12^{10}\cdot 36^9\cdot 108^1, & |\det \NS(X_6^2)_0| &= 2^{41}\cdot 3^{31}, \\
+  \SNF(V_0(X_6^2)) &= 1^{35}\cdot 3^{13}\cdot 6^1\cdot 12^8\cdot 36^3\cdot 108^1, & |\det V_0(X_6^2)| &= 2^{25}\cdot 3^{31}, \\
+  \SNF(W_{\mathrm{NL}}(X_6^2)) &= 1^6\cdot 3^{10}\cdot 12^2\cdot 36^6, & |\det W_{\mathrm{NL}}(X_6^2)| &= 2^{16}\cdot 3^{24},
+\end{align*}
+with gluing group $|\NS(X_6^2)_0 / (V_0 \oplus W_{\mathrm{NL}})| = 3^{12}$ (again purely $3$-adic, zero $2$-adic gluing; note $|\det V_0| = 6 \cdot |\det V_6^2|$ matches Table~1 of~\cite{AMVL19}).
+
+For any finite generating set $\mathcal{G} \subset \NS(X_6^2)_0$ spanning rank~$85$, choose an $85$-element basis $B \subset \mathcal{G}$ with Gram matrix $G_B$ and cross-Gram matrix $H = [\mathcal{G} \cdot B] \in \ZZ^{|\mathcal{G}| \times 85}$. Since the $\ZZ$-row span of $H$ equals $[\Lambda_{\mathcal{G}} \cdot B]$, the exact lattice index is
+\begin{equation}\label{eq:index}
+  \bigl[\NS(X_6^2)_0 : \Lambda_{\mathcal{G}}\bigr] = \frac{\det(\HNF(H))}{\sqrt{|\det G_B| \cdot |\det \NS(X_6^2)_0|}}.
+\end{equation}
+Computing $G_B$ and $H$ exactly over $\ZZ$ via dual split primes $q_1 = 10009, q_2 = 10333$ (exact matrix equality $G_{B,1} = G_{B,2}$ and $H_1 = H_2$) and evaluating $\HNF(H)$ and $\det(G_B)$ exactly over $\ZZ$ in SageMath (\texttt{verify\_surface\_x62.sage}, $\sim 5$\,s) gives Table~\ref{tab:x62}. Since $L_0 \cdot h = 1$, $\NS(X_6^2) = \ZZ[L_0] \oplus \NS(X_6^2)_0$, completing the proof of Theorem~\ref{thm:A}.
+
+\begin{table}[ht]
+\centering
+\caption{Exact integral indices in $\NS(X_6^2)_0$ ($\rank 85$, $|\det| = 2^{41}\cdot 3^{31}$).}\label{tab:x62}
+\begin{tabular}{@{}lccl@{}}
+\hline
+Generating set $\mathcal{G}$ & $\rank$ & $[\NS(X_6^2)_0 : \Lambda_{\mathcal{G}}]$ & $\SNF(\Lambda_{\mathcal{G}})$ \\
+\hline
+$108$ lines ($V_0$) & $61$ & $1$ (in $V_0$) & $1^{35}\cdot 3^{13}\cdot 6\cdot 12^8\cdot 36^3\cdot 108$ \\
+$\langle L,\; C_{\mathrm{Aoki}} \rangle$ & $85$ & $2^{16}\cdot 3^6$ & $1^{48}\cdot 2\cdot 4^4\cdot 12^{22}\cdot 36^9\cdot 108$ \\
+$\langle L,\; C_4 \rangle$ & $85$ & $2^{16}$ & $1^{48}\cdot 2\cdot 4^{16}\cdot 12^{10}\cdot 36^9\cdot 108$ \\
+$\langle L,\; C_4,\; C_{\mathrm{cube}} \rangle$ & $85$ & $\mathbf{1}$ & $1^{64}\cdot 2\cdot 12^{10}\cdot 36^9\cdot 108$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Proof of Theorem~\ref{thm:B}: Exact \texorpdfstring{$p$}{p}-adic Lattice Structure of \texorpdfstring{$X_6^4$}{X\_6\^{}4}}
+
+Direct $\ZZ$-Hermite normal form computation on the $2605$-dimensional Pham lattice of $X_6^4$ suffers severe intermediate coefficient swell. By Proposition~\ref{prop:prime-support}, however, all invariant factors of $L, S, T, V, W, W_{\mathrm{DEC20}}, W_{\mathrm{J11}}$ and their glue groups are supported strictly on $p \in \{2, 3\}$. Thus the global $\ZZ$-Smith normal form is uniquely and rigorously determined by its $p$-adic Smith normal forms at $p = 2$ and $p = 3$.
+
+Working over $\ZZ / p^K \ZZ$ with $K = 26$ ($p = 2$) and $K = 17$ ($p = 3$), we perform blocked exact integer arithmetic (\texttt{sextic\_padic\_exact.py}) to compute:
+\begin{enumerate}
+  \item $p$-adic saturated kernels $B_M$ of the period constraint matrices for $S, T, V, W, W_{\mathrm{DEC20}}, W_{\mathrm{J11}}$ (with $W$ extracted directly from $S$ via the linear constraints to minimize precision loss),
+  \item exact Gram matrices $G_M = B_M \Psi_L B_M^T \pmod{p^K}$, and
+  \item $p$-adic diagonal Smith normal forms, asserting at every step that the maximum $p$-adic valuation $\max v_p(d_i)$ lies strictly below the certified precision $K_{\mathrm{eff}}$.
+\end{enumerate}
+Every gluing identity is independently verified to $100\%$ precision:
+\begin{itemize}
+  \item $v_p(\det S) + v_p(\det T) - 2 v_p(|L/(S\oplus T)|) = v_p(\det L) = 1$ for $p = 2, 3$;
+  \item $\SNF(V)$ matches~\cite[Table~1]{AMVL19} for $(4,6)$ (after adjunction of $h^2$ with index~$6$), and $\SNF(S)$ matches~\cite[Computation~2.2]{SdJ26} at both $p = 2$ and $p = 3$;
+  \item By Nikulin's unimodular duality on $H_4(X_6^4, \ZZ) \supset \Hdg^2(X_6^4, \ZZ) \oplus T$, the discriminant group of $\Hdg^2(X_6^4, \ZZ)$ equals that of $T$, giving $|\det \Hdg^2(X_6^4, \ZZ)| = 2^{1698}\cdot 3^{1281}$ and the exact $\SNF$ in Theorem~\ref{thm:B};
+  \item $v_2(|S/(V\oplus W)|) = v_2(|W/(W_{\mathrm{DEC20}}\oplus W_{\mathrm{J11}})|) = 0$, while $S/(V\oplus W) \cong (\ZZ/3\ZZ)^{375}$ and $W/(W_{\mathrm{DEC20}}\oplus W_{\mathrm{J11}}) \cong (\ZZ/3\ZZ)^{30}$.
+\end{itemize}
+
+\section{Proof of Theorem~\ref{thm:C} and Cross-Verification Against \texorpdfstring{\cite{SdJ26}}{Santana de Jesus (2026)}}
+
+Let $S = \Hdg^2(X_6^4, \ZZ)_0$ ($\rank 1751$, $v_2(\det S) = 1699$, $v_3(\det S) = 1282$). Because $P_0 \cdot h^2 = 1$, we have the exact integral direct sum $\Hdg^2(X_6^4, \ZZ) = \ZZ[P_0] \oplus S$, so it suffices to prove that the primitive cycle sublattice $\Lambda_{\mathrm{alg}} \subseteq S$ generated by the orbits of
+\[
+  P - P_0,\quad Z_{\mathrm{DEC20}}^{C_4} - 4 P_0,\quad Z_{\mathrm{J11}}^{\mathrm{Aoki}},\quad Z_{\mathrm{DEC20}}^{\mathrm{cube}},\quad Z_{\mathrm{J11}}^{\mathrm{cube}}
+\]
+satisfies $[S : \Lambda_{\mathrm{alg}}] = 1$.
+
+For any full-rank basis $B \subset \Lambda_{\mathrm{alg}}$ (size $1751$) with Gram matrix $G_B$ and any finite batch of integral primitive cycles $\mathcal{G} \subset \Lambda_{\mathrm{alg}}$ with cross-Gram matrix $H = [\mathcal{G} \cdot B] \in \ZZ^{|\mathcal{G}| \times 1751}$, formula~\eqref{eq:index} gives the exact $p$-adic residual index
+\begin{equation}\label{eq:vp-index}
+  v_p([S : \Lambda_{\mathcal{G}}]) = v_p\bigl(\det \HNF_p(H)\bigr) - \frac{v_p(\det G_B) + v_p(\det S)}{2} \ge 0.
+\end{equation}
+
+\subsection{Step 1: Exact proof of the \texorpdfstring{$\ZZ[\frac{1}{2}]$}{Z[1/2]}-IHC (all odd primes \texorpdfstring{$p \ge 3$}{p >= 3})}
+Consider first the sublattice $\Lambda_0 := \langle P - P_0,\; Z_{\mathrm{DEC20}}^{C_4} - 4 P_0,\; Z_{\mathrm{J11}}^{\mathrm{Aoki}} \rangle \subseteq \Lambda_{\mathrm{alg}} \subseteq S$.
+\begin{enumerate}
+  \item \textbf{Exact basis determinant (zero floating-point):} Extracting a $1751$-element $\QQ$-basis $B_0 \subset \Lambda_0$ and restoring $G_{B_0} \in \ZZ^{1751 \times 1751}$ identically across $q_1 = 10009$ and $q_2 = 10333$ (Lemma~\ref{lem:split-prime}), exact FLINT/SageMath integer determinant evaluation via the script \texttt{referee\_certify\_exact.sage} ($333.6$\,s) proves
+  \[
+    \det(G_{B_0}) = 2^{2799} \cdot 3^{1314}
+  \]
+  (a $1469$-digit exact integer) with \emph{no} prime factors $p \ge 5$. Since $v_p(\det S) = 0$ for all $p \ge 5$, it follows immediately that $v_p([S : \Lambda_0]) = 0$ for \emph{every} prime $p \ge 5$.
+  \item \textbf{$p = 3$ saturation:} Running $p$-adic row-HNF reduction (\texttt{test\_c4\_on\_x64.py}, $K = 17$, $\max v_3 = 2 < 17$) over $3239$ planes, $7200$ translates of $Z_{\mathrm{DEC20}}^{C_4}$, and $5400$ translates of $Z_{\mathrm{J11}}^{\mathrm{Aoki}}$ yields
+  \[
+    v_3([S : \Lambda_0]) : 16 \xrightarrow{P} 15 \xrightarrow{Z_{\mathrm{DEC20}}^{C_4}} 0, \qquad v_2([S : \Lambda_0]) : 550 \xrightarrow{Z_{\mathrm{DEC20}}^{C_4}} 426.
+  \]
+\end{enumerate}
+Hence $[S : \Lambda_0] = 2^{426}$ exactly, proving part~(1) of Theorem~\ref{thm:C} and guaranteeing that $[S : \Lambda_{\mathrm{alg}}] \mid 2^{426}$ (in particular, $v_p([S : \Lambda_{\mathrm{alg}}]) = 0$ for all odd primes $p \ge 3$).
+
+\subsection{Step 2: Complete annihilation of \texorpdfstring{$p = 2$ ($2^{426} \to 1$)}{p = 2 (index 2 to the 426 -> 1)}}
+Layer-by-layer orthogonal projection (\texttt{diagnose\_x64\_cokernel.py}) shows that the residual $2^{426}$ of $\Lambda_0$ splits cleanly with zero gluing as $v_2(V) = 0$, $v_2(W_{\mathrm{DEC20}}) = 380$, and $v_2(W_{\mathrm{J11}}) = 46$.
+Adjoining the $(\mu_6^6 \rtimes S_6)$-orbits of $Z_{\mathrm{DEC20}}^{\mathrm{cube}}$ and $Z_{\mathrm{J11}}^{\mathrm{cube}}$ (\texttt{test\_full\_z\_ihc\_x64.py}, $K = 26$, $\max v_2 = 5 < 26$, every batch verified across both $q_1 = 10009$ and $q_2 = 10333$) produces the exact waterfall in Table~\ref{tab:x64}.
+(Table~\ref{tab:x64} starts from a fresh $1751$-element pivot basis $B \subset \Lambda_{\mathrm{alg}}$ drawn across all five families, whose initial valuations $(v_2, v_3) = (549, 18)$ differ slightly from $(550, 16)$ for the three-family basis $B_0 \subset \Lambda_0$ in Step~1; after adjoining $P$, $Z_{\mathrm{DEC20}}^{C_4}$, and $Z_{\mathrm{J11}}^{\mathrm{Aoki}}$, both runs converge to the identical intermediate index $(v_2, v_3) = (426, 0)$.)
+
+\begin{table}[ht]
+\centering
+\caption{Exact $p$-adic residual index reduction on $X_6^4$ ($p = 2, 3$; all batches verified mod $q_1 = 10009$ and $q_2 = 10333$).}\label{tab:x64}
+\small
+\begin{tabular}{@{}lrrl@{}}
+\hline
+Cumulative cycle batches in $S = \Hdg^2(X_6^4, \ZZ)_0$ & $v_2$ & $v_3$ & Geometric effect \\
+\hline
+Initial $1751$-element basis $B$ & $549$ & $18$ & Full rational span \\
+$+ 3239$ linear planes $P - P_0$ & $549$ & $17$ & Saturates $V$ ($\rank 1001$) \\
+$+ 7200$ translates of $Z_{\mathrm{DEC20}}^{C_4} - 4 P_0$ & $426$ & $\mathbf{0}$ & Saturates all $405$ dims of $3$-adic glue \\
+$+ 5400$ translates of $Z_{\mathrm{J11}}^{\mathrm{Aoki}}$ & $426$ & $\mathbf{0}$ & Saturates $W_{\mathrm{J11}}$ at $p = 3$ \\
+$+ 7200$ translates of $Z_{\mathrm{DEC20}}^{\mathrm{cube}}$ (r1--r2) & $\mathbf{46}$ & $\mathbf{0}$ & Annihilates $2^{380}$ in $W_{\mathrm{DEC20}}$ \\
+$+ 5400$ translates of $Z_{\mathrm{J11}}^{\mathrm{cube}}$ (r1--r2) & $\mathbf{0}$ & $\mathbf{0}$ & Annihilates $2^{46}$ in $W_{\mathrm{J11}}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+Combining $v_2([S : \Lambda_{\mathrm{alg}}]) = 0$ with $[S : \Lambda_{\mathrm{alg}}] \mid [S : \Lambda_0] = 2^{426}$ proves $[S : \Lambda_{\mathrm{alg}}] = 1$, hence $\Lambda_{\mathrm{alg}}^{\mathrm{full}} = \Hdg^2(X_6^4, \ZZ)$. This completes the proof of Theorem~\ref{thm:C}. \qed
+
+\subsection{Direct cross-verification against \texorpdfstring{Santana de Jesus~\cite{SdJ26}}{Santana de Jesus (2026)}}
+To provide an independent audit of our new type-$(1,2,2)$ family $Z_{\mathrm{DEC20}}^{C_4}$ directly inside the framework of~\cite{SdJ26}, we evaluated $Z_{\mathrm{DEC20}}^{C_4}$ through the exact Pham-coordinate bridge~\cite[Lemma~2.3]{SdJ26} and projected onto the published certified $3$-adic basis \texttt{K3.npy} of $S \otimes \ZZ_3$ in the four-odd parity sector $00111$ (even pair $\{x_1, x_2\}$, odd coordinates $\{x_0, x_3, x_4, x_5\}$, rank~$70$; scripts \texttt{audit\_against\_rafaty.py} and \texttt{audit\_truth\_serum.py}):
+\begin{enumerate}
+  \item The Fourier coefficients $2\hat{c}(a)$ of $Z_{\mathrm{DEC20}}^{C_4}$ lie cleanly in $\ZZ[\zeta_6]$ (zero exceptions), the pairing vector $v = \Psi c \in \ZZ^{3125}$ of $[Z_{\mathrm{DEC20}}^{C_4}] - 4[P_0]$ is an exact integer vector with $\max |v_\gamma| = 5$, and every even and odd $S_6$-permutation agrees with the canonical Jacobian determinant sign ($\langle Z_{\mathrm{DEC20}}^{C_4}, P_0 \rangle \in \{-6, -1, 1, 0\} \subset \ZZ$).
+  \item The vector $[Z_{\mathrm{DEC20}}^{C_4}] - 4[P_0]$ lies strictly in $S_{00111} \pmod 3$ ($\rank(S_{00111}) = 70$ unchanged).
+  \item Whereas all $5611$ explicit classes of $A'$ in~\cite{SdJ26} attained rank~$63/70 \pmod 3$ in sector~$00111$ (leaving $7$ missing directions per sector, hence index $3^{105}$), the $6$ cosets of $Z_{\mathrm{DEC20}}^{C_4}$ alone already span $66/70$ dimensions modulo~$3$, and \textbf{linear planes $P$ together with the $6$ cosets of $Z_{\mathrm{DEC20}}^{C_4}$ achieve the full rank $70/70 \pmod 3$} (in $23.9$\,s).
+\end{enumerate}
+By $S_6$-symmetry across the $15$ four-odd sectors, this independently confirms inside the verifier of~\cite{SdJ26} that $Z_{\mathrm{DEC20}}^{C_4}$ closes all $105$ residual directions without invoking Lefschetz~$(1,1)$ correspondences.
+
+\section{Computational Reproducibility and Remarks}
+
+All computations were executed in SageMath~10.10 (with FLINT) and NumPy~2.x on Linux (x86\_64) and are completely deterministic and self-contained:
+\begin{itemize}
+  \item \texttt{verify\_surface\_x62.sage}: standalone exact $\ZZ$-proof of Theorem~\ref{thm:A}, Proposition~\ref{prop:geometry}(1), and Table~\ref{tab:x62} ($\sim 5$\,s).
+  \item \texttt{sextic\_padic\_exact.py}: exact $p$-adic proof of Theorem~\ref{thm:B} ($\sim 6$\,min on 2 cores).
+  \item \texttt{referee\_certify\_exact.sage} and \texttt{verify\_5\_surfaces\_geometry.sage}: exact proofs of Proposition~\ref{prop:geometry} and exact $1469$-digit FLINT integer $\det(G_{B_0}) = 2^{2799}\cdot 3^{1314}$ ($\sim 334$\,s, zero floating-point).
+  \item \texttt{test\_c4\_on\_x64.py} and \texttt{test\_full\_z\_ihc\_x64.py}: exact $p$-adic proofs of Theorem~\ref{thm:C} parts~(1) and~(2).
+  \item \texttt{audit\_truth\_serum.py}: direct cross-verification of $Z_{\mathrm{DEC20}}^{C_4}$ on the published \texttt{K3.npy} basis of~\cite{SdJ26} ($\sim 24$\,s, confirming rank $70/70 \pmod 3$ in sector $00111$).
+\end{itemize}
+The method developed here---combining $p$-adic local-to-global Smith reduction, dual split-prime Griffiths residue arithmetic, and complementary even/odd-degree K3 quotient lifts---extends naturally to higher composite Fermat fourfolds such as $X_8^4$ and $X_{12}^4$, where higher-order $2$-adic and $3$-adic gluing phenomena occur.
+
+\begin{thebibliography}{99}
+
+\bibitem{AMVL19}
+E.~Aljovin, H.~Movasati, and R.~Villaflor Loyola,
+\emph{Integral Hodge conjecture for Fermat varieties},
+J. Symbolic Comput. \textbf{95} (2019), 177--184, arXiv:1711.02628.
+
+\bibitem{AS83}
+N.~Aoki and T.~Shioda,
+\emph{Generators of the N\'eron--Severi group of a Fermat surface},
+in \emph{Arithmetic and Geometry}, Vol.~I, Progr. Math. \textbf{35}, Birkh\"auser, Boston, 1983, pp.~1--12.
+
+\bibitem{AS10}
+N.~Aoki and T.~Shioda,
+\emph{Correction and supplement to the paper ``Generators of the N\'eron--Severi group of a Fermat surface''},
+Comment. Math. Univ. St. Pauli \textbf{59} (2010), no.~1, 65--75.
+
+\bibitem{AH62}
+M.~F.~Atiyah and F.~Hirzebruch,
+\emph{Analytic cycles on complex manifolds},
+Topology \textbf{1} (1962), 25--45.
+
+\bibitem{ABvB13}
+A.~Auel, C.~B\"ohning, and H.-C.~Graf von Bothmer,
+\emph{The transcendental lattice of the sextic Fermat surface},
+Math. Res. Lett. \textbf{20} (2013), no.~6, 1017--1031.
+
+\bibitem{BFLGVL24}
+A.~P.~Braun, H.~Fortin, D.~Lopez Garcia, and R.~Villaflor Loyola,
+\emph{More on $G$-flux and general Hodge cycles on the Fermat sextic},
+J. High Energy Phys. \textbf{2024} (2024), no.~6, Paper No.~46.
+
+\bibitem{Deg15}
+A.~Degtyarev,
+\emph{Lines generate the Picard groups of certain Fermat surfaces},
+J. Number Theory \textbf{147} (2015), 454--477.
+
+\bibitem{DS16}
+A.~Degtyarev and I.~Shimada,
+\emph{On the topology of projective subspaces in complex Fermat varieties},
+J. Math. Soc. Japan \textbf{68} (2016), no.~3, 975--996, arXiv:1405.4683.
+
+\bibitem{Kol92}
+J.~Koll\'ar,
+\emph{Trento examples}, in \emph{Classification of Irregular Varieties},
+Lecture Notes in Math. \textbf{1515}, Springer, 1992, pp.~134--139.
+
+\bibitem{MVL18}
+H.~Movasati and R.~Villaflor Loyola,
+\emph{Periods of linear algebraic cycles},
+Pure Appl. Math. Q. \textbf{14} (2018), no.~3--4, 563--577.
+
+\bibitem{SdJ26}
+R.~Santana de Jesus,
+\emph{The integral Hodge conjecture for the Fermat sextic fourfold},
+Preprint (November 1, 2026), \url{https://github.com/Rafaty/integral-hodge-fermat-sextic}.
+
+\bibitem{Shi79}
+T.~Shioda,
+\emph{The Hodge conjecture for Fermat varieties},
+Math. Ann. \textbf{245} (1979), no.~2, 175--184.
+
+\bibitem{VL22}
+R.~Villaflor Loyola,
+\emph{Periods of complete intersection algebraic cycles},
+Manuscripta Math. \textbf{167} (2022), 765--792, arXiv:1812.03964.
+
+\bibitem{Voi13}
+C.~Voisin,
+\emph{Some aspects of the Hodge conjecture},
+Jpn. J. Math. \textbf{2} (2007), 261--296; and \emph{Abel--Jacobi map, integral Hodge classes and decomposition of the diagonal}, J. Algebraic Geom. \textbf{22} (2013), 141--174.
+
+\end{thebibliography}
+
+\end{document}

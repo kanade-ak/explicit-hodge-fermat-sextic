@@ -2,8 +2,6 @@ __pycache__/
 *.py[cod]
 *.sage.py
 verification/external/
-paper/paper_en.pdf
-paper/paper_en.tex
 paper/*.aux
 paper/*.log
 paper/*.out
