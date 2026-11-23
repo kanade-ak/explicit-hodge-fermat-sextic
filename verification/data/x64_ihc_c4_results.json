@@ -1,0 +1,58 @@
+{
+  "2": {
+    "p": 2,
+    "vp_S": 1699,
+    "vp_GB": 2799,
+    "final_vp_index": 426,
+    "trace": [
+      {
+        "stage": "0_G_B",
+        "vp_index": 550
+      },
+      {
+        "stage": "1_all_3239_planes",
+        "vp_index": 550
+      },
+      {
+        "stage": "2_Z_C4_7200_r1",
+        "vp_index": 426
+      },
+      {
+        "stage": "3_Z_C4_7200_r2",
+        "vp_index": 426
+      },
+      {
+        "stage": "4_Z_J11_5400_r1",
+        "vp_index": 426
+      }
+    ]
+  },
+  "3": {
+    "p": 3,
+    "vp_S": 1282,
+    "vp_GB": 1314,
+    "final_vp_index": 0,
+    "trace": [
+      {
+        "stage": "0_G_B",
+        "vp_index": 16
+      },
+      {
+        "stage": "1_all_3239_planes",
+        "vp_index": 15
+      },
+      {
+        "stage": "2_Z_C4_7200_r1",
+        "vp_index": 0
+      },
+      {
+        "stage": "3_Z_C4_7200_r2",
+        "vp_index": 0
+      },
+      {
+        "stage": "4_Z_J11_5400_r1",
+        "vp_index": 0
+      }
+    ]
+  }
+}

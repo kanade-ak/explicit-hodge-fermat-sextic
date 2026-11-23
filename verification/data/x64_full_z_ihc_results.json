@@ -1,0 +1,98 @@
+{
+  "2": {
+    "p": 2,
+    "vp_S": 1699,
+    "vp_GB": 2797,
+    "final_vp_index": 0,
+    "trace": [
+      {
+        "stage": "0_G_B",
+        "vp_index": 549
+      },
+      {
+        "stage": "1_all_3239_planes",
+        "vp_index": 549
+      },
+      {
+        "stage": "2_Z_C4_7200",
+        "vp_index": 426
+      },
+      {
+        "stage": "3_Z_J11_Aoki_5400",
+        "vp_index": 426
+      },
+      {
+        "stage": "4_Z_DEC20_cube_7200_r1",
+        "vp_index": 46
+      },
+      {
+        "stage": "5_Z_DEC20_cube_7200_r2",
+        "vp_index": 46
+      },
+      {
+        "stage": "6_Z_J11_cube_5400_r1",
+        "vp_index": 0
+      },
+      {
+        "stage": "7_Z_J11_cube_5400_r2",
+        "vp_index": 0
+      },
+      {
+        "stage": "8_Z_DEC20_B6_5400",
+        "vp_index": 0
+      },
+      {
+        "stage": "9_Z_J11_B6_3600",
+        "vp_index": 0
+      }
+    ]
+  },
+  "3": {
+    "p": 3,
+    "vp_S": 1282,
+    "vp_GB": 1318,
+    "final_vp_index": 0,
+    "trace": [
+      {
+        "stage": "0_G_B",
+        "vp_index": 18
+      },
+      {
+        "stage": "1_all_3239_planes",
+        "vp_index": 17
+      },
+      {
+        "stage": "2_Z_C4_7200",
+        "vp_index": 0
+      },
+      {
+        "stage": "3_Z_J11_Aoki_5400",
+        "vp_index": 0
+      },
+      {
+        "stage": "4_Z_DEC20_cube_7200_r1",
+        "vp_index": 0
+      },
+      {
+        "stage": "5_Z_DEC20_cube_7200_r2",
+        "vp_index": 0
+      },
+      {
+        "stage": "6_Z_J11_cube_5400_r1",
+        "vp_index": 0
+      },
+      {
+        "stage": "7_Z_J11_cube_5400_r2",
+        "vp_index": 0
+      },
+      {
+        "stage": "8_Z_DEC20_B6_5400",
+        "vp_index": 0
+      },
+      {
+        "stage": "9_Z_J11_B6_3600",
+        "vp_index": 0
+      }
+    ]
+  }
+}
